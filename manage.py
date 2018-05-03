@@ -16,12 +16,12 @@ def init_database():
     db.create_all()
     for i in range(0,100):
         db.session.add(User('User'+str(i+1),'a'+str(i)))
-        for j in range(0,3):
+        for j in range(0,6):
             db.session.add(Image(get_image_url(),i+1))
             for k in range(0,3):
-                db.session.add(Comment('This is a comment'+str(k),3*i+j+1,i+1))
+                db.session.add(Comment('This is a comment'+str(k),6*i+j+1,i+1))
     db.session.commit()
-
+    '''
     print 1,User.query.all()
     print 2,User.query.get(3)
     print 3,User.query.filter_by(id=5).all()
@@ -39,8 +39,11 @@ def init_database():
         comment = Comment.query.get(i+1)
         db.session.delete(comment)
     db.session.commit()
-
-
+    '''
+    for i in range(0,4):
+        image = Image.query.get(600-i)
+        db.session.delete(image)
+    db.session.commit()
 
 if __name__ == '__main__':
     manager.run()
